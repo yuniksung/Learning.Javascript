@@ -36,12 +36,9 @@ var fight = function(enemyNames) {
     // check enemy's health
     if (enemyHealth <= 0) {
       window.alert(enemyNames + ' has died!');
-
-      // award player money for winning
+       // award player money for winning
       playerMoney = playerMoney + 20;
-
-      // leave while() loop since enemy is dead
-      break;
+      break;      // leave while() loop since enemy is dead
     } else {
       window.alert(enemyNames + ' still has ' + enemyHealth + ' health left.');
     }
@@ -64,8 +61,22 @@ var fight = function(enemyNames) {
 };
 
 // execute function
-for(var i = 0; i < enemyNames.length; i++) {
-  fight(enemyNames[i]);
+for (var i = 0; i < enemyNames.length; i++) {
+  // Pick new enemy to fight based on the index of the enemyNames array
+  var pickedEnemyName = enemyNames[i];
+  // reset enemyHealth before starting a new fight
+  enemyHealth = 50;
+  // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
+  fight(pickedEnemyName);
+
+  if (playerHealth > 0) {
+    // let user know what round they are in, remember that array start at 0 so it needs to have 1 added to it
+    window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
+  } else {
+    window.alert ("You have lost your robot in battle! Game Over");
+  }
+
+
 }
 
 var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
@@ -97,8 +108,7 @@ if (promptFight === "fight" || promptFight === "FIGHT") {
   // check player's health
   if (playerHealth <= 0) {
     window.alert(playerName + " has died!");
-  } 
-  else {
+  } else {
     window.alert(playerName + " still has " + playerHealth + " health left.");
   }
 
@@ -117,9 +127,9 @@ if (promptFight === "fight" || promptFight === "FIGHT") {
     window.alert(playerName + " has decided to skip this fight. Goodbye!");
     //subtract money from playerMoney for skipping
     playerMoney = playerMoney -2;
-  }
+ 
   // If no (false), ask question again by running fight() again
-  else{
+  } else{
     fight();
   }
   
