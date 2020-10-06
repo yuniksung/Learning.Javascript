@@ -3,10 +3,12 @@ var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
 
+// You can also log multiple values at once like this
+console.log(playerName, playerAttack, playerHealth);
+
 var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
-
 console.log(enemyNames, enemyHealth, enemyAttack);
 
 console.log(enemyNames[0]);
@@ -14,21 +16,20 @@ console.log(enemyNames[1]);
 console.log(enemyNames[2]);
 console.log(enemyNames.length);
 
-// This is for loop
 for(var i = 0; i < enemyNames.length; i++){
   console.log(enemyNames[i]);
   console.log(i);
   console.log(enemyNames[i] + " is at " + i + " index");
 }
 
+
 // create function
 function fight() {
   window.alert("Welcome to Robot Gladiators!");
 }
 
-var fight = function(enemyName) {
-  // Alert users that they are starting the round
-  window.alert("Welcome to Robot Gladiators!");
+var fight = function(enemyNames) {
+  window.alert("Welcome to Robot Gladiators!"); // fight function statements
 
 //Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable
 enemyHealth = enemyHealth - playerAttack;
@@ -76,9 +77,10 @@ else {
   window.alert(playerName + " still has " + playerHealth + " health left.");
 }
 };
-
 // execute function
-fight();
+for(var i = 0; i < enemyNames.length; i++) {
+  fight(enemyNames[i]);
+}
 
 var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
 
