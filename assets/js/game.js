@@ -1,4 +1,10 @@
 var fightOrSkip = function() {
+  // keep track of who goes first
+  var isPlayerTurn = true;
+  // randomly change turn order
+  if (Math.random() > 0.5) {
+    isPlayerTurn = false;
+  }
   // ask user if they'd like to fight or skip using  function
   var promptFight = window.prompt('Would you like FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
 
@@ -91,10 +97,6 @@ for (var i = 0; i < enemyInfo.length; i++) {
         shop();
     }
   }
-}
-else {
-  window.alert("You have lost your robot in battle! Game Over!");
-  break;
 }
 }
 endGame(); 
