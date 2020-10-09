@@ -1,13 +1,6 @@
 var fightOrSkip = function() {
-  // keep track of who goes first
-  var isPlayerTurn = true;
-  // randomly change turn order
-  if (Math.random() > 0.5) {
-    isPlayerTurn = false;
-  }
-  // ask user if they'd like to fight or skip using  function
+   // ask user if they'd like to fight or skip using  function
   var promptFight = window.prompt('Would you like FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
-
   // Enter the conditional recursive function call here!
   // Conditional Recursive Function Call
 if (promptFight === "" || promptFight === null) {
@@ -19,21 +12,23 @@ promptFight = promptFight.toLowerCase();
   if (promptFight === "skip" || promptFight === "SKIP") {
     // confirm user wants to skip
     var confirmSkip = window.confirm("Are you sure you'd like to quit?");
-
     // if yes (true), leave fight
     if (confirmSkip) {
       window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
       // subtract money from playerMoney for skipping, but don't let them go into the negative
       playerInfo.money = Math.max(0, playerInfo.money - 10);
-
       // return true if user wants to leave
       return true;
     }
   }
-}
-
+};
 
 var fight = function(enemy) {
+  var isPlayerTurn = true;
+  if (Math.random() > 0.5) {
+    isPlayerTurn = false;
+  }
+
   while (playerInfo.health > 0 && enemy.health > 0) {
     // ask user if they'd like to fight or skip using fightOrSkip function
     if (fightOrSkip()) {
@@ -43,10 +38,8 @@ var fight = function(enemy) {
 
     // generate random damage value based on player's attack power
     var damage = randomNumber(playerInfo.attack -3, playerInfo.attack);
-
     enemy.health = Math.max(0, enemy.health - damage);
 
-  
     console.log(
       playerInfo.name + " attacked " + enemy.name + ". " + enemy.name + " now has " + enemy.health + " health remaining.");
 
@@ -62,7 +55,6 @@ var fight = function(enemy) {
 
     // Subtract the value of `enemyAttack` from the value of `playerHealth` and use that result to update the value in the `playerHealth` variable.
     var damage = randomNumber(enemy.attack - 3, enemy.attack);
-
     playerInfo.health = Math.max(0, playerInfo.health - damage);
     // Log a resulting message to the console so we know that it worked.
     console.log(
@@ -77,20 +69,20 @@ var fight = function(enemy) {
       window.alert(playerInfo.name + ' still has ' + playerInfo.health + ' health left.');
     }
   }
+  isPlayerTurn = !isPlayerTurn;
 };
+
 
 // function to end the entire game
 var startGame = function() {
   //reset player stats
   playerInfo.reset();
-
 for (var i = 0; i < enemyInfo.length; i++) {
   if (playerInfo.health > 0) {
       window.alert("Welcome to Robot Gladiators! Round " + ( i + 1 ) );
       var pickedEnemyObj = enemyInfo[i];
       pickedEnemyObj.health = randomNumber(40, 60); 
       fight(pickedEnemyObj);
-
   if (playerInfo.health > 0 && i < enemyInfo.length - 1) {
     var storeConfirm = window.confirm("The fight is over, vist the store before the next round?");
     if (storeConfirm) {
@@ -101,7 +93,6 @@ for (var i = 0; i < enemyInfo.length; i++) {
 }
 endGame(); 
 };
-
 var endGame = function() {
   if (playerInfo.health > 0) {
       window.alert("Great job, you've survived the game! You now have a score of " + playerInfo.money + ".");
@@ -109,7 +100,6 @@ var endGame = function() {
   else {
       window.alert("You've lost your robot in battle.");
     }  
-    
      // check localStorage for high score, if it's not there, use 0
   var highScore = localStorage.getItem("highscore");
   if (highScore === null) {
@@ -194,7 +184,7 @@ var playerInfo = {
     this.health += 20;
     this.money = -7;
     } else {
-      window.alert("You don't have nough money!");
+      window.alert("You don't have enough money!");
     }
   }, //comma!
   upgradeAttack: function() {
